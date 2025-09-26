@@ -1,0 +1,39 @@
+# Django
+*.pyc
+*.pyo
+__pycache__/
+*.so
+.env
+.env.local
+db.sqlite3
+db.sqlite3-journal
+/media
+/static
+*.log
+
+# Virtual Environment
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Security reports
+bandit-report.json
+safety-report.json
