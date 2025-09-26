@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-=g-et7_fv&0x*53s7-37ea^dkj^2f(ap43aa8h6u90vo@tbc@#"
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY", "django-insecure-=g-et7_fv&0x*53s7-37ea^dkj^2f(ap43aa8h6u90vo@tbc@#"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -138,9 +141,14 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 20,
 }
 
-# CORS settings
-CORS_ALLOW_ALL_ORIGINS = True  # Only for development
+# CORS settings - Configure for your frontend origins
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://localhost:8080",
+    "http://127.0.0.1:8080",
 ]
+
+# Only allow all origins in development if DEBUG is True and explicit env var is set
+if DEBUG and os.environ.get("CORS_ALLOW_ALL_ORIGINS") == "true":
+    CORS_ALLOW_ALL_ORIGINS = True
